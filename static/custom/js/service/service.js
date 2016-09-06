@@ -81,11 +81,35 @@ var Service = (function () {
                   },
                   onLazyRead: function(node){
                     var n = node;
-                    node.appendAjax({
+                    /*node.appendAjax({
                             url: "/getsubcategory",
-                            data: {key: node.data.key,mode: "funnyMode"}
-                    });
+                            data: {'categoryId': node.data.id,mode: "funnyMode"}
+                    });*/
+                      if(node.data.type == 'category'){
+                         httpOb.get('/getsubcategory',
+                          {
+                            params:{
+                              'categoryId': node.data.id,mode: "funnyMode"
+                            }
 
+                          }).success(function (data, status, headers) {
+                            if(data.length > 0){
+                              for(i in data){
+                                  var entry = {'id':data[i].pk,'title':data[i].fields.name,'isLazy':true,'type':'subcategory'}
+                                  node.addChild(entry);
+                                }
+                            }
+                            else{
+                               node.setLazyNodeStatus(DTNodeStatus_Ok);
+                            }
+
+                          }).error(function (data, status, headers) {
+                              node.setLazyNodeStatus(DTNodeStatus_Error);
+                          })
+                      }
+                      else{
+                        node.setLazyNodeStatus(DTNodeStatus_Ok);
+                      }
                   },
                   strings: {
                     loading: "Loading…",

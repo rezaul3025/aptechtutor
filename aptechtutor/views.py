@@ -26,7 +26,7 @@ def addcategory(request):
 	categoryType = request.POST['type']
 	parentId = request.POST['parentId']
 	
-	if parentId == -1:
+	if parentId == '-1':
 		category = Category.objects.create(name=categoryname)
 	elif categoryType=='subcategory':
 		category = Category.objects.get(pk=parentId)
@@ -50,9 +50,13 @@ def getcategory(request):
 
 @require_http_methods(["GET"])
 def getsubcategory(request):
+	categoryId = request.GET['categoryId']
+	print categoryId
+	category = Category.objects.get(pk=categoryId)
+	print category
+	subCategory = SubCategory.objects.filter(category=category)
+	data = serializers.serialize('json', subCategory,fields=('name'))
+	print data
 	
-	names = set()
-	
-	names.add({'id':12,'title': u'Zara', 'isLazy':'true'});
-	return HttpResponse(json.dumps(list(names)), content_type="application/json")
+	return HttpResponse(data)
 
