@@ -39,7 +39,8 @@ def addcategory(request):
 	return HttpResponse(data) 
 
 @require_http_methods(["GET"])
-def getcategory(request):
+def getcategory(request, id):
+	print(id)
 	categories = Category.objects.all()
 	names = set()
 	
@@ -51,12 +52,12 @@ def getcategory(request):
 @require_http_methods(["GET"])
 def getsubcategory(request):
 	categoryId = request.GET['categoryId']
-	print categoryId
+	print(categoryId)
 	category = Category.objects.get(pk=categoryId)
-	print category
+	print(category)
 	subCategory = SubCategory.objects.filter(category=category)
 	data = serializers.serialize('json', subCategory,fields=('name'))
-	print data
+	print(data)
 	
 	return HttpResponse(data)
 

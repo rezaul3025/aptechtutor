@@ -22,7 +22,7 @@ urlpatterns = [
 	url(r'^$', views.index, name='index'),
 	url(r'^tadmin/', views.tadmin, name='tadmin'),
 	url(r'addcategory/', views.addcategory, name='addcategory'),
-	url(r'getcategory/', views.getcategory, name='getcategory'),
+	url(r'^getcategory/(?P<id>\w+)/$', views.getcategory, name='getcategory'),
 	url(r'getsubcategory/', views.getsubcategory, name='getsubcategory'),
     url(r'^admin/', admin.site.urls),
 ]
