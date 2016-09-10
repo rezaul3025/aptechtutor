@@ -185,6 +185,54 @@ var Service = (function () {
         }
  
     };
+
+    Service.prototype.addContentOnCategory = function (contentTitle, content) {
+        
+        if(contentTitle == null || typeof contentTitle == 'undefined' || contentTitle == ''){
+            alert('Please, enter content title.')
+        }
+        else if(content == null || typeof content == 'undefined' || content == ''){
+            alert('Please, enter content.')
+        }
+        else if(selectedNode == null || typeof selectedNode == 'undefined'){
+            alert('Please, select content category.')
+        }
+        else if(selectedNode.data.type == 'subcategory'){
+                //selectedNode.data.hideCheckbox=true
+                selectedNode.bExpanded = true;
+                var childNode = selectedNode.addChild({
+                  title: contentTitle,
+                  tooltip: contentTitle
+                });
+            
+                childNode.data.select = true;
+                childNode.data.focus = true;
+
+                var type = 'subcategory';
+                var id = selectedNode.data.id;
+
+                var url = contentTitle.replace(/ /g, "");
+
+                httpOb({
+                  method : "POST",
+                  url : "/addcontent/",
+                  headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded'
+                  },
+                  data:$.param({
+                    'title' : contentTitle,
+                    'content' : content,
+                    'id':id,
+                    'type':type,
+                    'url':url
+                  })
+              }).then(function mySucces(response) {
+                  alert(response.data);
+              }, function myError(response) {
+                  
+              });
+          }
+    };
     
     Service.prototype.initChangePath = function (value) {
         changePath = value;

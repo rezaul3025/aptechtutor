@@ -10,7 +10,7 @@ from django.core import serializers
 
 import json
 
-from aptechtutor.models import Category,SubCategory
+from aptechtutor.models import Category,SubCategory,Content
 
 def index(request):
 	#conn = getConnection()
@@ -35,6 +35,23 @@ def addcategory(request):
 	
 	
 	data = serializers.serialize('json', [category])
+	
+	return HttpResponse(data) 
+
+@require_http_methods(["POST"])
+@csrf_exempt
+def addcontent(request):
+	contenttitle = request.POST['title']
+	content = request.POST['content']
+	categoryId = request.POST['id']
+	url = request.POST['url']
+	
+	category = SubCategory.objects.get(pk=categoryId)
+	
+	contentOb = Content.objects.create(title=contenttitle, content=content, category=category)
+	
+	
+	data = serializers.serialize('json', [contentOb])
 	
 	return HttpResponse(data) 
 

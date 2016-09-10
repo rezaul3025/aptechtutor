@@ -180,13 +180,13 @@
            		<form>
 				  <div class="form-group">
 				    <label for="contentTitle">Cotent Title</label>
-				    <input type="text" class="form-control" id="contentTitle" placeholder="Email">
+				    <input type="text" class="form-control" ng-model="contentTitle" id="contentTitle" placeholder="Email">
 				  </div>
 				  <div class="form-group">
 				    <label for="content">Add Content</label>
 				    <hc-ck-editor ng-model="contentEditor" id="content"></hc-ck-editor>
 				  </div>
-				  <button type="button" class="btn btn-primary">Submit</button>
+				  <button type="button" class="btn btn-primary" ng-click="addContent(contentTitle)">Submit</button>
 				</form>
            		
            	</div>
