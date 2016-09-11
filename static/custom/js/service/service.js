@@ -166,6 +166,9 @@ var Service = (function () {
                   
             })*/
 
+            var url = newNodeTitle.toLowerCase();
+            url = url.replace(/ /g, "");
+
             httpOb({
                   method : "POST",
                   url : "/addcategory/",
@@ -175,7 +178,8 @@ var Service = (function () {
                   data:$.param({
                     'category' : newNodeTitle,
                     'type':type,
-                    'parentId':id
+                    'parentId':id,
+                    'url':url
                   })
               }).then(function mySucces(response) {
                   alert(response.data);

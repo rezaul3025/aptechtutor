@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
 	url(r'^tadmin/', views.tadmin, name='tadmin'),
+    url(r'^category/(?P<urlSuffix>\w+)/$', views.category, name='category'),
 	url(r'addcategory/', views.addcategory, name='addcategory'),
     url(r'addcontent/', views.addcontent, name='addcontent'),
 	url(r'^getcategory/(?P<id>\w+)/$', views.getcategory, name='getcategory'),

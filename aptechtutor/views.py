@@ -14,10 +14,17 @@ from aptechtutor.models import Category,SubCategory,Content
 
 def index(request):
 	#conn = getConnection()
-	return render(request, 'index.html')
+	categories = Category.objects.all()
+	return render(request, 'index.html',{'category_list':categories})
 
 def tadmin(request):
 	return render(request,'tadmin.html')
+
+def category(request, urlSuffix):
+	print(urlSuffix)
+	categories = Category.objects.all()
+	return render(request, 'category.html',{'category_list':categories})
+
 
 @require_http_methods(["POST"])
 @csrf_exempt
@@ -25,12 +32,13 @@ def addcategory(request):
 	categoryname = request.POST['category']
 	categoryType = request.POST['type']
 	parentId = request.POST['parentId']
+	url = request.POST['url']
 	
 	if parentId == '-1':
-		category = Category.objects.create(name=categoryname)
+		category = Category.objects.create(name=categoryname, url=url)
 	elif categoryType=='subcategory':
 		category = Category.objects.get(pk=parentId)
-		sub_category = SubCategory.objects.create(name=categoryname,category=category)
+		sub_category = SubCategory.objects.create(name=categoryname,url=url,category=category)
 
 	
 	
@@ -48,7 +56,7 @@ def addcontent(request):
 	
 	category = SubCategory.objects.get(pk=categoryId)
 	
-	contentOb = Content.objects.create(title=contenttitle, content=content, category=category)
+	contentOb = Content.objects.create(title=contenttitle, content=content, url=url, category=category)
 	
 	
 	data = serializers.serialize('json', [contentOb])
