@@ -166,8 +166,8 @@
          
          	<div class="se-pre-con"></div>
          	<ol>
-         	{% for subcategory in sub_category_list %}
-    			<li><a href="/category/{{categoryUrl}}/{{subcategory.url}}">{{subcategory.name}}</a></li>
+         	{% for content in content_list %}
+    			<li><a href="/category/{{content.title}}">{{content.title}}</a></li>
 			{% endfor %}
           </ol>
         </div><!--/.col-xs-12.col-sm-9-->

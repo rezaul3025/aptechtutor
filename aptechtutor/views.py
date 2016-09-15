@@ -22,8 +22,20 @@ def tadmin(request):
 
 def category(request, urlSuffix):
 	print(urlSuffix)
+	category = Category.objects.get(url=urlSuffix)
+	sub_category = SubCategory.objects.all().filter(category=category)
+	print(sub_category)
 	categories = Category.objects.all()
-	return render(request, 'category.html',{'category_list':categories})
+	return render(request, 'category.html',{'category_list':categories,'categoryUrl':urlSuffix,'sub_category_list':sub_category})
+
+def subCategory(request, urlSuffix, category):
+	print(urlSuffix)
+	sub_category = SubCategory.objects.get(url=urlSuffix)
+	print(sub_category)
+	content = Content.objects.all().filter(category=sub_category)
+	print(content)
+	categories = Category.objects.all()
+	return render(request, 'content.html',{'category_list':categories,'content_list':content})
 
 
 @require_http_methods(["POST"])

@@ -1,4 +1,4 @@
-module.controller('tadminController', ['$http', '$scope', '$window', function($http, $scope, $window) {
+module.controller('aptechtutorController', ['$http', '$scope', '$window', function($http, $scope, $window) {
 	
   
 
