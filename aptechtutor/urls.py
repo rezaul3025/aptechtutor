@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'addcontent/', views.addcontent, name='addcontent'),
 	url(r'^getcategory/(?P<id>\w+)/$', views.getcategory, name='getcategory'),
 	url(r'getsubcategory/', views.getsubcategory, name='getsubcategory'),
+    url(r'getcontentbycategoryid/', views.getContentByCategoryId, name='getContentByCategoryId'),
     url(r'^admin/', admin.site.urls),
 ]

@@ -155,7 +155,7 @@
       </div><!-- /.container -->
     </nav><!-- /.navbar -->
 
-    <div class="container-fluid" >
+    <div class="container" >
 
       <div class="row row-offcanvas row-offcanvas-right">
 
@@ -167,7 +167,7 @@
          	<div class="se-pre-con"></div>
          	<ol>
          	{% for content in content_list %}
-    			<li><a href="/category/{{content.title}}">{{content.title}}</a></li>
+    			<li>{{content.content | safe }}</li>
 			{% endfor %}
           </ol>
         </div><!--/.col-xs-12.col-sm-9-->

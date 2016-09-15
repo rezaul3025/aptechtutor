@@ -10,6 +10,7 @@ var Service = (function () {
     var localUrl;
     var changePath = false;
     var previousPath = null;
+    var selectedContentId = null;
 
     function Service(timeout, http) {
         var _this = this;
@@ -66,6 +67,25 @@ var Service = (function () {
                     });
                     
                     selectedNode = node;
+
+                    if(node.data.type == 'subcategory')
+                    {
+                      httpOb.get('/getcontentbycategoryid',
+                            {
+                              params:{
+                                'categoryId': node.data.id,mode: "funnyMode"
+                              }
+
+                            }).success(function (data, status, headers) {
+                               alert(data[0].fields.title);
+                               scope.contentEditor = data[0].fields.content;
+                               scope.contentTitle = data[0].fields.title;
+                               selectedContentId = data[0].pk;
+
+                            }).error(function (data, status, headers) {
+                                
+                            })
+                      }
               
                   },
                   
@@ -213,9 +233,9 @@ var Service = (function () {
                 childNode.data.focus = true;
 
                 var type = 'subcategory';
-                var id = selectedNode.data.id;
+                var categoryId = selectedNode.data.id;
 
-                var url = contentTitle.replace(/ /g, "");
+                var url = contentTitle.replace(/ /g, "").replace(/./g, "");
 
                 httpOb({
                   method : "POST",
@@ -226,7 +246,8 @@ var Service = (function () {
                   data:$.param({
                     'title' : contentTitle,
                     'content' : content,
-                    'id':id,
+                    'categoryId':categoryId,
+                    'id':selectedContentId,
                     'type':type,
                     'url':url
                   })

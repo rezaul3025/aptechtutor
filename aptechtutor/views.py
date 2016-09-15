@@ -63,12 +63,18 @@ def addcategory(request):
 def addcontent(request):
 	contenttitle = request.POST['title']
 	content = request.POST['content']
-	categoryId = request.POST['id']
+	categoryId = request.POST['categoryId']
 	url = request.POST['url']
+	id = request.POST['id']
 	
-	category = SubCategory.objects.get(pk=categoryId)
-	
-	contentOb = Content.objects.create(title=contenttitle, content=content, url=url, category=category)
+	contentOb = ''
+	if id == 'null':
+		category = SubCategory.objects.get(pk=categoryId)
+		contentOb = Content.objects.create(title=contenttitle, content=content, url=url, category=category)
+		print('Content created')
+	else:
+		contentOb = Content.objects.filter(pk=id).update(title=contenttitle, content=content)
+		print('Content updated')
 	
 	
 	data = serializers.serialize('json', [contentOb])
@@ -97,4 +103,16 @@ def getsubcategory(request):
 	print(data)
 	
 	return HttpResponse(data)
+
+@require_http_methods(["GET"])
+def getContentByCategoryId(request):
+	categoryId = request.GET['categoryId']
+	print(category)
+	subCategory = SubCategory.objects.get(pk=categoryId)
+	content = Content.objects.get(category=subCategory)
+	data = serializers.serialize('json', [content],fields=('title','content','url','category'))
+	print(data)
+	
+	return HttpResponse(data)
+
 
