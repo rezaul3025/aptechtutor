@@ -1,8 +1,14 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <ol>
-        {% for content in content_list %}
-    			<li>{{content.content | safe }}</li>
-		{% endfor %}
-    </ol>
+    <h2>{{content.title}}</h2>
+    <hr/>
+   	<div>{{content.content | safe }}</div>
+{% endblock %}
+
+{% block sidebar %}
+	<div class="list-group">
+		{% for subcategory in sub_category_list %}
+    		<a class="list-group-item" href="/category/{{categoryUrl}}/{{subcategory.url}}/{{subcategory.pk}}">{{subcategory.name}}</a>
+    	{% endfor %}     
+	</div> 
 {% endblock %}

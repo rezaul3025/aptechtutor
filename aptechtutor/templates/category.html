@@ -2,10 +2,17 @@
 {% block content %}
 	<h2>{{category.name}}</h2>
 	<hr/>
-	<ol>
+	<!--ol>
         {% for subcategory in sub_category_list %}
     		<li><a href="/category/{{categoryUrl}}/{{subcategory.url}}/{{subcategory.pk}}">{{subcategory.name}}</a></li>
 		{% endfor %}
-    </ol>
+    </ol-->
+    <div class="row">
+    	{% for subcategory in sub_category_list %}
+    	<div class="col-xs-6 col-sm-4">
+    		<p><a href="/category/{{categoryUrl}}/{{subcategory.url}}/{{subcategory.pk}}"><span class="glyphicon glyphicon-link"></span>		{{subcategory.name}}</a></p>
+    	</div>
+    	{% endfor %}
+    </div>
 {% endblock %}
         

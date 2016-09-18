@@ -31,11 +31,14 @@ def category(request, urlSuffix, id):
 def subCategory(request, urlSuffix, category, id):
 	print(urlSuffix)
 	sub_category = SubCategory.objects.get(url=urlSuffix ,pk=id)
+	sub_category_list = SubCategory.objects.all().filter(category=sub_category.category)
 	print(sub_category)
 	content = Content.objects.all().filter(category=sub_category)
+	if len(content) > 0:
+		content = content[0]
 	print(content)
 	categories = Category.objects.all()
-	return render(request, 'content.html',{'category_list':categories,'content_list':content})
+	return render(request, 'content.html',{'category_list':categories,'categoryUrl':urlSuffix,'sub_category_list':sub_category_list,'content':content})
 
 
 @require_http_methods(["POST"])
