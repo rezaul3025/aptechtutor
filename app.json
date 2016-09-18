@@ -1,0 +1,8 @@
+{
+  "name": "aptecttutor",
+  "description": "A java tutorial app",
+  "image": "heroku/python",
+  "repository": "https://github.com/rezaul3025/aptechtutor.git",
+  "keywords": ["python", "django" ],
+  "addons": [ "ClearDB-MySQL" ]
+}

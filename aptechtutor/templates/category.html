@@ -130,7 +130,7 @@
           <ul class="nav navbar-nav">
             <li><a href="/">HOME</a></li>
             {% for category in category_list %}
-    			<li><a href="/category/{{category.url}}">{{category.name}}</a></li>
+    			<li><a href="/category/{{category.url}}/{{category.pk}}">{{category.name}}</a></li>
 			{% endfor %}
             <li><a href="#about">ABOUT</a></li>
             <li><a href="#contact">CONTACT</a></li>
@@ -167,7 +167,7 @@
          	<div class="se-pre-con"></div>
          	<ol>
          	{% for subcategory in sub_category_list %}
-    			<li><a href="/category/{{categoryUrl}}/{{subcategory.url}}">{{subcategory.name}}</a></li>
+    			<li><a href="/category/{{categoryUrl}}/{{subcategory.url}}/{{subcategory.pk}}">{{subcategory.name}}</a></li>
 			{% endfor %}
           </ol>
         </div><!--/.col-xs-12.col-sm-9-->

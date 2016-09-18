@@ -10,7 +10,7 @@ var Service = (function () {
     var localUrl;
     var changePath = false;
     var previousPath = null;
-    var selectedContentId = null;
+    var selectedContentId = -1;
 
     function Service(timeout, http) {
         var _this = this;
@@ -67,6 +67,11 @@ var Service = (function () {
                     });
                     
                     selectedNode = node;
+
+                    selectedContentId = -1;
+
+                    scope.contentEditor = '';
+                    scope.contentTitle = '';
 
                     if(node.data.type == 'subcategory')
                     {
@@ -235,7 +240,8 @@ var Service = (function () {
                 var type = 'subcategory';
                 var categoryId = selectedNode.data.id;
 
-                var url = contentTitle.replace(/ /g, "").replace(/./g, "");
+                var url = contentTitle.replace(/ /g, "");
+                url = contentTitle.replace(/\./g, "");
 
                 httpOb({
                   method : "POST",
@@ -248,7 +254,6 @@ var Service = (function () {
                     'content' : content,
                     'categoryId':categoryId,
                     'id':selectedContentId,
-                    'type':type,
                     'url':url
                   })
               }).then(function mySucces(response) {

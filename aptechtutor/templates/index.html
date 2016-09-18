@@ -130,7 +130,7 @@
           <ul class="nav navbar-nav">
             <li><a href="/">HOME</a></li>
             {% for category in category_list %}
-    			<li><a href="/category/{{category.url}}">{{category.name}}</a></li>
+    			<li><a href="/category/{{category.url}}/{{category.pk}}">{{category.name}}</a></li>
 			{% endfor %}
             <li><a href="#about">ABOUT</a></li>
             <li><a href="#contact">CONTACT</a></li>

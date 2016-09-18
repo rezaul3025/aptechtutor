@@ -20,17 +20,17 @@ def index(request):
 def tadmin(request):
 	return render(request,'tadmin.html')
 
-def category(request, urlSuffix):
+def category(request, urlSuffix, id):
 	print(urlSuffix)
-	category = Category.objects.get(url=urlSuffix)
+	category = Category.objects.get(url=urlSuffix, pk=id)
 	sub_category = SubCategory.objects.all().filter(category=category)
 	print(sub_category)
 	categories = Category.objects.all()
 	return render(request, 'category.html',{'category_list':categories,'categoryUrl':urlSuffix,'sub_category_list':sub_category})
 
-def subCategory(request, urlSuffix, category):
+def subCategory(request, urlSuffix, category, id):
 	print(urlSuffix)
-	sub_category = SubCategory.objects.get(url=urlSuffix)
+	sub_category = SubCategory.objects.get(url=urlSuffix ,pk=id)
 	print(sub_category)
 	content = Content.objects.all().filter(category=sub_category)
 	print(content)
@@ -68,7 +68,7 @@ def addcontent(request):
 	id = request.POST['id']
 	
 	contentOb = ''
-	if id == 'null':
+	if id == '-1':
 		category = SubCategory.objects.get(pk=categoryId)
 		contentOb = Content.objects.create(title=contenttitle, content=content, url=url, category=category)
 		print('Content created')
