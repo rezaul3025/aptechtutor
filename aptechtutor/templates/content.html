@@ -6,9 +6,9 @@
 {% endblock %}
 
 {% block sidebar %}
-	<div class="list-group">
+	<ul>
 		{% for subcategory in sub_category_list %}
-    		<a class="list-group-item" href="/category/{{categoryUrl}}/{{subcategory.url}}/{{subcategory.pk}}">{{subcategory.name}}</a>
+    		<p><a href="/category/{{categoryUrl}}/{{subcategory.url}}/{{subcategory.pk}}"><span class="glyphicon glyphicon-link"></span>	{{subcategory.name}}</a></p>
     	{% endfor %}     
-	</div> 
+	</ul> 
 {% endblock %}
