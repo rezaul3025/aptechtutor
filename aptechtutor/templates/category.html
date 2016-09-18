@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
+	<h2>{{category.name}}</h2>
+	<hr/>
 	<ol>
         {% for subcategory in sub_category_list %}
     		<li><a href="/category/{{categoryUrl}}/{{subcategory.url}}/{{subcategory.pk}}">{{subcategory.name}}</a></li>

@@ -26,7 +26,7 @@ def category(request, urlSuffix, id):
 	sub_category = SubCategory.objects.all().filter(category=category)
 	print(sub_category)
 	categories = Category.objects.all()
-	return render(request, 'category.html',{'category_list':categories,'categoryUrl':urlSuffix,'sub_category_list':sub_category})
+	return render(request, 'category.html',{'category':category,'category_list':categories,'categoryUrl':urlSuffix,'sub_category_list':sub_category})
 
 def subCategory(request, urlSuffix, category, id):
 	print(urlSuffix)
