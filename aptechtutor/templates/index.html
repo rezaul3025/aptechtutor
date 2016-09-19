@@ -2,9 +2,11 @@
 {% block content %}
 	<div class="row" style="margin-bottom:180px">
 	    	{% for category in category_list %}
-	            <div class="col-xs-6 col-sm-4">
-	    			<a class="thumbnail" href="/category/{{category.url}}/{{category.pk}}">{{category.name}}</a>
-	            </div>
+	    		{% if category.hide == "F" %}
+		            <div class="col-xs-6 col-sm-4">
+		    			<a class="thumbnail" href="/category/{{category.url}}/{{category.pk}}">{{category.name}}</a>
+		            </div>
+	            {% endif %}
 			{% endfor %}
 	 </div>
  {% endblock %}

@@ -50,10 +50,10 @@ def addcategory(request):
 	url = request.POST['url']
 	
 	if parentId == '-1':
-		category = Category.objects.create(name=categoryname, url=url)
+		category = Category.objects.create(name=categoryname, url=url, hide='F')
 	elif categoryType=='subcategory':
 		category = Category.objects.get(pk=parentId)
-		sub_category = SubCategory.objects.create(name=categoryname,url=url,category=category)
+		sub_category = SubCategory.objects.create(name=categoryname,url=url,category=category, hide='F')
 
 	
 	
@@ -123,12 +123,12 @@ def hideShowNode(request, type, id, option):
 	print(id)
 	print(option)
 	if type == 'category':
-		Category.objects.filter(pk=id).update(hide=bool(option))
+		Category.objects.filter(pk=id).update(hide=option)
 		category = Category.objects.get(pk=id)
 		subCategory_list = SubCategory.objects.filter(category=category)
 		for subCategory in subCategory_list:
 			print(subCategory.name)
-			SubCategory.objects.filter(pk=subCategory.pk).update(hide=bool(option))
+			SubCategory.objects.filter(pk=subCategory.pk).update(hide=option)
 	if type == 'subcategory':
 		SubCategory.objects.filter(pk=id).update(hide=option)
 	return HttpResponse(option)

@@ -129,7 +129,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             {% for category in category_list %}
-            	{% if forloop.counter < 7%}
+            	{% if forloop.counter < 7 and category.hide == "F" %}
     				<li><a href="/category/{{category.url}}/{{category.pk}}">{{category.name}}</a></li>
             	{%endif%}
 			{% endfor %}
@@ -140,7 +140,7 @@
 	          </a>
 	          <ul class="dropdown-menu">
 	            {% for category in category_list %}
-	            	{% if forloop.counter > 6%}
+	            	{% if forloop.counter > 6 and category.hide == "F" %}
 	    				<li><a href="/category/{{category.url}}/{{category.pk}}">{{category.name}}</a></li>
 	            	{%endif%}
 				{% endfor %}

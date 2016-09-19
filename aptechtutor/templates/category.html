@@ -9,9 +9,11 @@
     </ol-->
     <div class="row">
     	{% for subcategory in sub_category_list %}
-    	<div class="col-xs-6 col-sm-4">
-    		<p><a href="/category/{{categoryUrl}}/{{subcategory.url}}/{{subcategory.pk}}"><span class="glyphicon glyphicon-link"></span>		{{subcategory.name}}</a></p>
-    	</div>
+            {% if subcategory.hide == "F" %}
+            	<div class="col-xs-6 col-sm-4">
+            		<p><a href="/category/{{categoryUrl}}/{{subcategory.url}}/{{subcategory.pk}}"><span class="glyphicon glyphicon-link"></span>		{{subcategory.name}}</a></p>
+            	</div>
+            {% endif %}
     	{% endfor %}
     </div>
 {% endblock %}

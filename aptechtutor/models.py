@@ -3,13 +3,13 @@ from django.db import models
 class Category(models.Model):
 	name = models.CharField(max_length=255)
 	url = models.CharField(max_length=255)
-	hide = models.BooleanField(default=False)
+	hide = models.CharField(max_length=5, default='F')
 	
 
 class SubCategory(models.Model):
 	name = models.CharField(max_length=255)
 	url = models.CharField(max_length=255)
-	hide = models.BooleanField(default=False)
+	hide = models.CharField(max_length=5,default='F')
 	category=models.ForeignKey(Category)
 
 class Content(models.Model):
