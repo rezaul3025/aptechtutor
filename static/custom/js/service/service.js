@@ -264,8 +264,18 @@ var Service = (function () {
           }
     };
     
-    Service.prototype.initChangePath = function (value) {
-        changePath = value;
+    Service.prototype.hideShowNode = function (option) {
+        if(selectedNode == null || typeof selectedNode == 'undefined'){
+            alert('Please, select category.')
+        }
+        else{
+          httpOb.get('/hideshownode/'+selectedNode.data.type+'/'+selectedNode.data.id+'/'+option,
+                 {}).success(function (data, status, headers) {
+                            
+              }).error(function (data, status, headers) {
+                        
+              })
+        }
     }
     
     getSelectedPath = function(element, keyPath){

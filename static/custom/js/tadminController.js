@@ -38,6 +38,10 @@ module.controller('tadminController', ['$http', '$scope', '$window', 'hcService'
       hcService.addContentOnCategory(title, $scope.contentEditor);
   };
 
+  $scope.hideShowNode = function(option){
+    hcService.hideShowNode(option);
+  }
+
 
 	$scope.getSearchKey = function(val) {
     return $http.get('/getsearchautocomplete/', {

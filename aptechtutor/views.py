@@ -118,4 +118,21 @@ def getContentByCategoryId(request):
 	
 	return HttpResponse(data)
 
+@require_http_methods(["GET"])
+def hideShowNode(request, type, id, option):
+	print(id)
+	if type == 'category':
+		Category.objects.filter(pk=id).update(hide=option)
+		category = Category.objects.get(pk=id)
+		subCategory_list = SubCategory.objects.filter(category=category)
+		for subCategory in subCategory_list:
+			print(subCategory.name)
+			SubCategory.objects.filter(pk=subCategory.pk).update(hide=option)
+	if type == 'subcategory':
+		SubCategory.objects.filter(pk=id).update(hide=option)
+	return HttpResponse(option)
+
+
+
+
 
