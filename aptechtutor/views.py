@@ -121,13 +121,14 @@ def getContentByCategoryId(request):
 @require_http_methods(["GET"])
 def hideShowNode(request, type, id, option):
 	print(id)
+	print(option)
 	if type == 'category':
-		Category.objects.filter(pk=id).update(hide=option)
+		Category.objects.filter(pk=id).update(hide=bool(option))
 		category = Category.objects.get(pk=id)
 		subCategory_list = SubCategory.objects.filter(category=category)
 		for subCategory in subCategory_list:
 			print(subCategory.name)
-			SubCategory.objects.filter(pk=subCategory.pk).update(hide=option)
+			SubCategory.objects.filter(pk=subCategory.pk).update(hide=bool(option))
 	if type == 'subcategory':
 		SubCategory.objects.filter(pk=id).update(hide=option)
 	return HttpResponse(option)
