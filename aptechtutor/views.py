@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, RequestContext,render_to_response
+from django.shortcuts import render,redirect, RequestContext,render_to_response
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.http import Http404,HttpRequest,HttpResponse,HttpResponseRedirect
@@ -23,6 +23,10 @@ def tadmin(request):
 def category(request, urlSuffix, id):
 	print(urlSuffix)
 	category = Category.objects.get(url=urlSuffix, pk=id)
+
+	if category.hide == 'T':
+		return redirect('/404pagenotfound')
+
 	sub_category = SubCategory.objects.all().filter(category=category)
 	print(sub_category)
 	categories = Category.objects.all()
@@ -31,6 +35,10 @@ def category(request, urlSuffix, id):
 def subCategory(request, urlSuffix, category, id):
 	print(urlSuffix)
 	sub_category = SubCategory.objects.get(url=urlSuffix ,pk=id)
+
+	if sub_category.hide == 'T':
+		return redirect('/404pagenotfound')
+
 	sub_category_list = SubCategory.objects.all().filter(category=sub_category.category)
 	print(sub_category)
 	content = Content.objects.all().filter(category=sub_category)
@@ -40,6 +48,8 @@ def subCategory(request, urlSuffix, category, id):
 	categories = Category.objects.all()
 	return render(request, 'content.html',{'category_list':categories,'categoryUrl':urlSuffix,'sub_category_list':sub_category_list,'content':content})
 
+def pageNotFound(request):
+	return render(request, '404.html')
 
 @require_http_methods(["POST"])
 @csrf_exempt

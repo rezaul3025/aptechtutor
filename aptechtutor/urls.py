@@ -29,5 +29,6 @@ urlpatterns = [
 	url(r'^getcategory/(?P<id>\w+)/$', views.getcategory, name='getcategory'),
 	url(r'getsubcategory/', views.getsubcategory, name='getsubcategory'),
     url(r'getcontentbycategoryid/', views.getContentByCategoryId, name='getContentByCategoryId'),
+    url(r'404pagenotfound/', views.pageNotFound, name='404PageNotFound'),
     url(r'^admin/', admin.site.urls),
 ]
