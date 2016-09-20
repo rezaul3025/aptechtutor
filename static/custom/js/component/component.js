@@ -83,10 +83,10 @@ module.directive('hcCkEditor', function () {
         require: '?ngModel',
         template: function (element, attrs) {
             
-            return '<textarea id="contentEditor" ></textarea>';
+            return '<textarea id="contentEditor"></textarea>';
         },
         link: function (scope, element, attrs, ngModel) {
-          var ck = CKEDITOR.replace(element[0]);
+          var ck = CKEDITOR.replace(element[0], {height: 400});
 
             /*if (!ngModel){
               return;
