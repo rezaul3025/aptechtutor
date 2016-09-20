@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
 	url(r'^tadmin/', views.tadmin, name='tadmin'),
+    url(r'^login/$', views.login, name='login'),
     url(r'^category/(?P<urlSuffix>\w+)/(?P<id>\w+)/$', views.category, name='category'),
     url(r'^category/(?P<category>\w+)/(?P<urlSuffix>\w+)/(?P<id>\w+)/$', views.subCategory, name='subCategory'),
     url(r'^hideshownode/(?P<type>\w+)/(?P<id>\w+)/(?P<option>\w+)/$', views.hideShowNode, name='hideShowNode'),

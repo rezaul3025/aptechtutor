@@ -8,6 +8,8 @@ from django.views.decorators.http import require_http_methods
 
 from django.core import serializers
 
+from django.contrib.auth.decorators import login_required
+
 import json
 
 from aptechtutor.models import Category,SubCategory,Content
@@ -17,8 +19,13 @@ def index(request):
 	categories = Category.objects.all()
 	return render(request, 'index.html',{'category_list':categories})
 
+@login_required(login_url='/login/')
 def tadmin(request):
 	return render(request,'tadmin.html')
+
+def login(request):
+	nextpage = request.GET['next']
+	return render(request,'login.html',{'nextpage':nextpage})
 
 def category(request, urlSuffix, id):
 	print(urlSuffix)
