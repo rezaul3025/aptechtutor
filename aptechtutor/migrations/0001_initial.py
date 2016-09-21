@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=255)),
                 ('url', models.CharField(max_length=255)),
+                ('hide', models.CharField(default=b'F', max_length=5)),
             ],
         ),
         migrations.CreateModel(
@@ -33,6 +34,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=255)),
                 ('url', models.CharField(max_length=255)),
+                ('hide', models.CharField(default=b'F', max_length=5)),
                 ('category', models.ForeignKey(to='aptechtutor.Category')),
             ],
         ),

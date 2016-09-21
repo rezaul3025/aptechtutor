@@ -2,10 +2,11 @@
 {% block content %}
 
 <form class="form-signin" method="POST" action="/dologin/">
+{% csrf_token %}
 	<h2 class="form-signin-heading">Please login</h2>
 	<div class="form-group">
 		<label for="userName" class="sr-only">Email address</label>
-		<input type="email" name="username" id="userName" class="form-control" placeholder="Email address/ phone no." required>
+		<input type="text" name="username" id="userName" class="form-control" placeholder="Email address/ phone no." required>
 	</div>
 	<div class="form-group">
 		<label for="password" class="sr-only">Password</label>

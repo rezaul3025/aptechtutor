@@ -9,6 +9,7 @@ from django.views.decorators.http import require_http_methods
 from django.core import serializers
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 
 import json
 
@@ -19,13 +20,26 @@ def index(request):
 	categories = Category.objects.all()
 	return render(request, 'index.html',{'category_list':categories})
 
-@login_required(login_url='/login/')
+@login_required(login_url='/admin/login/')
 def tadmin(request):
 	return render(request,'tadmin.html')
 
-def login(request):
+def initlogin(request):
 	nextpage = request.GET['next']
 	return render(request,'login.html',{'nextpage':nextpage})
+
+@require_http_methods(["POST"])
+def dologin(request):
+	username = request.POST['username']
+	password = request.POST['password']
+	user = authenticate(username=username, password=password)
+	if user is not None:
+		login(request, user)
+		# Redirect to a success page.
+		return redirect('/tadmin/')
+	else:
+		# Return an 'invalid login' error message.
+		return redirect('/404pagenotfound')	
 
 def category(request, urlSuffix, id):
 	print(urlSuffix)
