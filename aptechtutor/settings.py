@@ -75,20 +75,31 @@ WSGI_APPLICATION = 'aptechtutor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-       # 'ENGINE': 'django.db.backends.sqlite3',
-       # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-       'NAME':'aptechtutor',
-       'ENGINE': 'django.db.backends.mysql',
-       'HOST': 'localhost',
-       'USER': 'root',
-       'PASSWORD': 'root' ,
-       'OPTIONS': {
-          'autocommit': True,
-        },
+if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+    # Running on production App Engine, so use a Google Cloud SQL database.
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/aptechtutor:us-central1:aptechtutor',
+            'NAME': 'root',
+            'USER': '',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+           # 'ENGINE': 'django.db.backends.sqlite3',
+           # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+           'NAME':'aptechtutor',
+           'ENGINE': 'django.db.backends.mysql',
+           'HOST': 'localhost',
+           'USER': 'root',
+           'PASSWORD': 'root' ,
+           'OPTIONS': {
+              'autocommit': True,
+            },
+        }
+    }
 
 
 # Password validation
