@@ -4,7 +4,7 @@ threadsafe: true
 
 libraries:
 - name: django
-  version: "1.9"
+  version: "1.9.5"
 
 builtins:
 - django_wsgi: on
