@@ -80,9 +80,9 @@ if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/aptechtutor:us-central1:aptechtutor',
-            'NAME': 'root',
-            'USER': '',
+            'HOST': '/cloudsql/mygapp-1:mygapp-sql2',
+            'NAME': 'aptechtutor',
+            'USER': 'root',
         }
     }
 else:
@@ -137,7 +137,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
+STATIC_ROOT='static'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
