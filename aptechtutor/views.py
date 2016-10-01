@@ -20,7 +20,7 @@ def index(request):
 	categories = Category.objects.all()
 	return render(request, 'index.html',{'category_list':categories})
 
-#@login_required(login_url='/admin/login/')
+@login_required(login_url='/admin/login/')
 def tadmin(request):
 	return render(request,'tadmin.html')
 
